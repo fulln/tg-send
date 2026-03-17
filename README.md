@@ -1,5 +1,7 @@
 # tg-send — Claude Code Skill
 
+[中文文档](./README_CN.md)
+
 A Claude Code skill (+ standalone Python script) that publishes Obsidian/Markdown documents to a Telegram channel.
 
 - **Text-only articles**: sent directly as Telegram messages
