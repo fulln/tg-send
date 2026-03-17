@@ -11,6 +11,25 @@
 
 ---
 
+## 为什么用 Bot，而不是 Telegram Application API？
+
+Telegram 官方提供两种发消息的方式：
+
+| 方式 | 说明 |
+|---|---|
+| **Application API**（MTProto） | 用 `api_id` + `api_hash` 以真实用户身份操作，功能最全 |
+| **Bot API** | 用 Bot Token 操作，仅限 bot 能做的事 |
+
+理论上 Application API 更强大，但**注册 Telegram Application 需要手机号验证**，在国内网络环境下，即使挂了代理，这一步也经常超时或失败——`api_id` 申请页面（my.telegram.org）本身对部分 IP 段有限制。
+
+Bot API 完全走 HTTPS，只要能访问 `api.telegram.org` 就能用，**对代理友好得多**。
+
+所以这个工具选择：
+1. 通过 Bot Token 调用 Bot API 发送消息到频道
+2. 图片先发到 Bot 与你的私聊（`sendPhoto`），借此获得 Telegram CDN 托管的公网 URL，再嵌入 Telegraph 文章——完全绕开第三方图床
+
+---
+
 ## 使用方式
 
 ### 独立脚本

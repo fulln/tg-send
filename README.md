@@ -11,6 +11,25 @@ After publishing, the source file's frontmatter is updated with `published.teleg
 
 ---
 
+## Why Bot API instead of Telegram Application API?
+
+Telegram offers two ways to send messages programmatically:
+
+| Method | Description |
+|---|---|
+| **Application API** (MTProto) | Uses `api_id` + `api_hash`, acts as a real user account — most powerful |
+| **Bot API** | Uses a Bot Token — simpler, HTTPS-only |
+
+The Application API requires phone number verification on [my.telegram.org](https://my.telegram.org) to obtain `api_id`. This page is **blocked or unreliable for many IP ranges** (especially when behind a VPN/proxy in China), making registration consistently fail.
+
+The Bot API is pure HTTPS against `api.telegram.org` — **it works reliably through any proxy** that can reach that endpoint.
+
+So this tool uses:
+1. Bot Token → Bot API to post messages to the channel
+2. Images are sent to the bot's private chat with you (`sendPhoto`) to obtain a Telegram-hosted CDN URL — no third-party image hosting needed
+
+---
+
 ## Usage
 
 ### As a standalone script
